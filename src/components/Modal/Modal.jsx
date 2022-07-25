@@ -6,11 +6,7 @@ import { ModalOverlay, ModalBox, Image } from './Modal.styled';
 const modalRoot = document.querySelector('#modal-root');
 
 export const Modal = ({onClose, selectedImg, tags}) =>{
-  // static propTypes = {
-  //   selectedImg: PropTypes.string,
-  //   tags: PropTypes.string,
-  //   onClose: PropTypes.func,
-  // };
+ 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
 
