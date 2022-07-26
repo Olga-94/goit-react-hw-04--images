@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { onInfoNotification } from 'Services/Notification';
 import { IoSearchSharp } from 'react-icons/io5';
@@ -10,31 +10,28 @@ import {
   SearchFormInput,
 } from './SearchBar.styled';
 
-export class SearchBar extends Component {
-  state = {
-    searchQuery: '',
+export const SearchBar = ({onSubmit}) => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleInputChange = e => {
+   setSearchQuery(e.currentTarget.value.toLowerCase());
   };
 
-  handleInputChange = e => {
-    this.setState({ searchQuery: e.currentTarget.value.toLowerCase() });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
-    if (this.state.searchQuery.trim() === '') {
+    if (searchQuery.trim() === '') {
       onInfoNotification();
       return;
-    }
+    } 
 
-    this.props.onSubmit(this.state.searchQuery);
-    this.setState({ searchQuery: '' });
+    onSubmit(searchQuery);
+    setSearchQuery('');
   };
 
-  render() {
     return (
       <SearchbarBox as="header">
-        <SearchForm onSubmit={this.handleSubmit}>
+        <SearchForm onSubmit={handleSubmit}>
           <SearchFormButton type="submit"> <IoSearchSharp />
             <SearchFormButtonLabel>Search</SearchFormButtonLabel>
           </SearchFormButton>
@@ -44,14 +41,14 @@ export class SearchBar extends Component {
             autoFocus
             placeholder="Search images and photos"
             name="searchQuery"
-            value={this.state.searchQuery}
-            onChange={this.handleInputChange}
+            value={searchQuery}
+            onChange={handleInputChange}
           />
         </SearchForm>
       </SearchbarBox>
     );
   }
-}
+
 
 SearchBar.propTypes = {
   onSubmit: PropTypes.func.isRequired,

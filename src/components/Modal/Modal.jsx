@@ -5,20 +5,13 @@ import { ModalOverlay, ModalBox, Image } from './Modal.styled';
 
 const modalRoot = document.querySelector('#modal-root');
 
-export const Modal = ({onClose, selectedImg, tags}) =>{
+export const Modal = ({onClose, selectedImg, tags}) => {
  
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
 
     return () => window.removeEventListener('keydown', handleKeyDown);
   });
-  // componentDidMount() {
-  //   window.addEventListener('keydown', this.handleKeyDown);
-  // }
-
-  // componentWillUnmount() {
-  //   window.removeEventListener('keydown', this.handleKeyDown);
-  // }
 
   const handleKeyDown = e => {
     if (e.code === 'Escape') {

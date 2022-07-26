@@ -11,7 +11,6 @@ import { Modal } from 'components/Modal/Modal';
 export const App  = () => {
 
     const [page, setPage] = useState(1);
-    // const [per_page, setPerPage] = useState(12);
     const [searchQuery, setSearchQuery] = useState('');
     const [images, setImages] = useState([]);
     const [selectedImg, setSelectedImg] = useState(null);
@@ -21,16 +20,15 @@ export const App  = () => {
 
   useEffect(() => {
     if (!searchQuery) {
-      return
+      return;
     }
-    
-  async function getFetchImages() {
+
+    async function getFetchImages() {
       setStatus('pending');
       const per_page = 12;
 
       try {
-        const {hits, totalHits } = await Api.getImages(searchQuery, page);
-        
+        const { hits, totalHits } = await Api.getImages(searchQuery, page);
 
         setImages(prevImages => [...prevImages, ...hits]);
         setStatus('resolved');
@@ -41,7 +39,6 @@ export const App  = () => {
             top: document.documentElement.scrollHeight,
             behavior: 'smooth',
           });
-          
         }
       } catch (error) {
         onErrorNotification();
@@ -81,7 +78,6 @@ export const App  = () => {
     setSelectedImg(null);
     setAlt(null);
     setStatus('idle');
-    // setIsVisible(false);
   }
 
     if (status === 'idle') {
@@ -92,7 +88,6 @@ export const App  = () => {
       return (
         <AppStyled>
           <SearchBar onSubmit={handleFormSubmit} />
-
           <ImageGallery
             images={images}
             selectedImage={handleSelectedImage}
