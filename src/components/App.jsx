@@ -28,11 +28,11 @@ export const App  = () => {
       const per_page = 12;
 
       try {
-        const { hits, totalHits } = await Api.getImages(searchQuery, page);
-
-        setImages(prevImages => [...prevImages, ...hits]);
+        const data = await Api.getImages(searchQuery, page);
+  // const data = response.data.hits; 
+        setImages(prevImages => [...prevImages, ...data.hits]);
         setStatus('resolved');
-        setIsVisible(page < Math.ceil(totalHits / per_page));
+        setIsVisible(page < Math.ceil(data.totalHits / per_page));
 
         if (page > 1) {
           window.scrollTo({

@@ -31,7 +31,7 @@ export const Modal = ({onClose, selectedImg, tags}) => {
           <Image src={selectedImg} alt={tags} />
         </ModalBox>
       </ModalOverlay>,
-      modalRoot
+      modalRoot,
     );
   
 }
